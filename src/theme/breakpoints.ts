@@ -1,27 +1,35 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { css } from 'styled-components';
+import { css, CSSObject, SimpleInterpolation } from 'styled-components';
 
-const breakpointsValues = {
+interface IBreakpoints {
+  sm: number;
+  md: number;
+  lg: number;
+}
+
+type Args = [CSSObject, SimpleInterpolation];
+
+const breakpointsValues: IBreakpoints = {
   sm: 600,
   md: 960,
   lg: 1280,
 };
 
-const getMin = (key) =>
-  `@media screen and (max-width: ${breakpointsValues[key] - 1}px)`;
+const getMin = (key: keyof IBreakpoints) =>
+  `@media screen and (min-width: ${breakpointsValues[key]}px)`;
 
 const breakpoints = {
-  sm: (...args) => css`
+  sm: (...args: Args) => css`
     ${getMin('sm')} {
       ${css(...args)}
     }
   `,
-  md: (...args) => css`
+  md: (...args: Args) => css`
     ${getMin('md')} {
       ${css(...args)}
     }
   `,
-  lg: (...args) => css`
+  lg: (...args: Args) => css`
     ${getMin('lg')} {
       ${css(...args)}
     }
