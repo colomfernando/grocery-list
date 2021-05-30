@@ -1,4 +1,22 @@
-# Getting Started with Create React App
+# Grocery list Demo
+
+This app is set up with React, Typescript and Styled components.
+
+## How to use
+
+Clone the repository and run npm i to install all dependencies.
+
+```
+git clone https://github.com/colomfernando/grocery-list.git
+npm i
+```
+
+Aftet thar, run in your terminal
+```
+npm start
+```
+
+Yo can try it in [link]()
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
