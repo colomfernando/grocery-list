@@ -2,15 +2,15 @@ import { validateString } from 'utils';
 
 const palette = {
   primary: {
-    light: '#7afad3',
-    main: '#4ce0b3',
-    dark: '#36ad89',
+    light: '#f2a07c',
+    main: '#ef8354',
+    dark: '#d66533',
     contrastText: '#fff',
   },
   secondary: {
-    light: '#ffb19e',
-    main: '#ff8e72',
-    dark: '#db775e',
+    light: '#7e8ba3',
+    main: '#4f5d75',
+    dark: '#36445c',
     contrastText: '#fff',
   },
   error: {

@@ -3,7 +3,7 @@ import { validateString, validateNumber } from 'utils';
 import svgs from './svgs';
 import Styles from './styles';
 
-interface IIconProps {
+export interface IIconProps {
   iconName: string;
   width?: number;
   height?: number;

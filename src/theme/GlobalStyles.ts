@@ -26,7 +26,7 @@ html {
 body {
   margin: 0;
 	font-family: 'Rubik', sans-serif;
-	background-color: ${palette.grey[50]}
+	background-color: ${palette.secondary.main}
 }
 /**
  * Render the main element consistently in IE.
