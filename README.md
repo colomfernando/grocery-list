@@ -1,4 +1,5 @@
 # Grocery list Demo
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This app is set up with React, Typescript and Styled components.
 
