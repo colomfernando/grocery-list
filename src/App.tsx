@@ -1,15 +1,15 @@
 import React from 'react';
 import GlobalStyles from 'theme/GlobalStyles';
-import Icon from 'components/Icon';
+import Header from 'components/Header';
+import InputSearch from 'components/InputSearch';
 
 const App: React.FC = () => {
   return (
     <>
       <GlobalStyles />
-      <div className="App">
-        <p>test</p>
-        <Icon iconName="eggs" />
-      </div>
+      <Header>
+        <InputSearch onChange={() => console.log('change')} />
+      </Header>
     </>
   );
 };
