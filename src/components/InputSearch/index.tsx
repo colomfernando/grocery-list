@@ -11,7 +11,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const { value } = target;
-    if (value) setValue(value);
+    setValue(value);
   };
 
   return (
