@@ -2,12 +2,17 @@ import React, { InputHTMLAttributes, useState } from 'react';
 import Styles from './styles';
 import palette from 'theme/palette';
 
-interface IInputSearchProps extends InputHTMLAttributes<HTMLInputElement> {
-  onChange: () => void;
-}
+type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
 
-const InputSearch: React.FC<IInputSearchProps> = ({ onChange }) => {
+const InputSearch: React.FC<IInputSearchProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState('');
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    const { value } = target;
+    if (value) setValue(value);
+  };
 
   return (
     <Styles.Wrapper>
@@ -18,7 +23,8 @@ const InputSearch: React.FC<IInputSearchProps> = ({ onChange }) => {
         color={palette.grey[700]}
       />
       <Styles.Input
-        onChange={onChange}
+        onChange={handleOnChange}
+        value={value}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
         placeholder="What do you need to buy?"

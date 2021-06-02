@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <>
       <GlobalStyles />
       <Header>
-        <InputSearch onChange={() => console.log('change')} />
+        <InputSearch />
       </Header>
     </>
   );
