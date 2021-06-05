@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, useState } from 'react';
 import Styles from './styles';
 import palette from 'theme/palette';
 import Chip from 'components/Chip';
+import { saveItem } from 'utils/ItemsCache';
 
 type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -13,6 +14,12 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
     const { target } = event;
     const { value } = target;
     setValue(value);
+  };
+
+  const handleSubmit = () => {
+    if (!value) return;
+    saveItem(value);
+    setValue('');
   };
 
   return (
@@ -30,6 +37,14 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
         onBlur={() => setIsOpen(false)}
         placeholder="What do you need to buy?"
       />
+      <Styles.SaveItem type="submit" disabled={!value} onClick={handleSubmit}>
+        <Styles.IconSave
+          iconName="check"
+          width={20}
+          height={20}
+          color={!value ? palette.grey[700] : palette.success.main}
+        />
+      </Styles.SaveItem>
       {isOpen && (
         <Styles.WrapperOptions>
           <Chip iconName="eggs" text="Eggs" onClick={() => null} />
