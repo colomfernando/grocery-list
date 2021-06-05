@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, useState } from 'react';
 import Styles from './styles';
 import palette from 'theme/palette';
+import Chip from 'components/Chip';
 
 type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -31,8 +32,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
       />
       {isOpen && (
         <Styles.WrapperOptions>
-          <p>test</p>
-          <p>adfadfs</p>
+          <Chip iconName="eggs" text="Eggs" onClick={() => null} />
         </Styles.WrapperOptions>
       )}
     </Styles.Wrapper>

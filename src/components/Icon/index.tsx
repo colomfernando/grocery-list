@@ -9,7 +9,13 @@ export interface IIconProps {
   height?: number;
   color?: string;
 }
-const Icon: React.FC<IIconProps> = ({ iconName, color, width, height }) => {
+const Icon: React.FC<IIconProps> = ({
+  iconName,
+  color,
+  width,
+  height,
+  ...props
+}) => {
   if (!iconName || !validateString(iconName)) return null;
   if (!(iconName in svgs)) return null;
 
@@ -24,6 +30,7 @@ const Icon: React.FC<IIconProps> = ({ iconName, color, width, height }) => {
       width={validWidth}
       height={validHeight}
       color={color}
+      {...props}
     >
       {paths.map((path, idx) => (
         <Styles.Path key={idx.toString()} d={path} />
