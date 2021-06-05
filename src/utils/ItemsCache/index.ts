@@ -17,7 +17,7 @@ export const saveItem = (item: string): void | null => {
       ? [item]
       : [...cacheItems, item];
 
-  return cache.setItem(ITEMS_CACHE_KEY, newItems, 5);
+  return cache.setItem(ITEMS_CACHE_KEY, newItems, 99);
 };
 
 export const getCountItems = (): parseItems => {

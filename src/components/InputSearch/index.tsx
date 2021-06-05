@@ -16,10 +16,17 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
     setValue(value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     if (!value) return;
     saveItem(value);
     setValue('');
+  };
+
+  const handleOnKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ): void => {
+    const { key } = event;
+    if (key === 'Enter') handleSubmit();
   };
 
   return (
@@ -32,6 +39,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
       />
       <Styles.Input
         onChange={handleOnChange}
+        onKeyDown={handleOnKeyDown}
         value={value}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setIsOpen(false)}
