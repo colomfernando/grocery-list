@@ -17,4 +17,5 @@ export type IAction = IAction<Items[]>;
 // State
 export interface IState {
   items: Item[];
+  loading: boolean;
 }
