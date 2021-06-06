@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GlobalStyles from 'theme/GlobalStyles';
 import Header from 'components/Header';
 import Body from 'components/Body';
-import { Provider } from 'react-redux';
-import store from 'store';
+import { useDispatch } from 'react-redux';
+import { initDbAction } from 'store/actions';
+import db from 'db';
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const items = db.getAllItems();
+    dispatch(initDbAction(items));
+  }, []);
+
   return (
-    <Provider store={store}>
+    <>
       <GlobalStyles />
       <Header />
       <Body />
-    </Provider>
+    </>
   );
 };
 
