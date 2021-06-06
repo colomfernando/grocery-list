@@ -59,9 +59,7 @@ const updateItem = (item: IItem): void => {
 
   const oldItems = getAllItems();
   const newItems = oldItems.map((oldItem: IItem) =>
-    oldItem.id === id
-      ? { id, ...rest, iconName: getItemIcon(item.name) }
-      : oldItem
+    oldItem.id === id ? { id, ...rest } : oldItem
   );
   setItemCache(newItems);
 };

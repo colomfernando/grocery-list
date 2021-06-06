@@ -18,9 +18,14 @@ const IconItem = styled(Icon)`
 const Title = styled.p`
   font-size: 18px;
   font-weight: 700;
-  margin: 5px 0;
+  margin: 10px 0;
+  color: ${palette.common.white};
+`;
+
+const Qty = styled.p`
+  font-size: 18px;
   color: ${palette.common.white};
 `;
 
 Wrapper.displayName = 'Item';
-export default { Wrapper, IconItem, Title };
+export default { Wrapper, IconItem, Title, Qty };

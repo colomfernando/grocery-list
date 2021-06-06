@@ -15,7 +15,7 @@ const Item: React.FC<IItemProps> = ({ id, name, iconName, qty }) => {
     <Styles.Wrapper>
       <Styles.IconItem iconName={iconName} />
       <Styles.Title>{name}</Styles.Title>
-      <p>{qty}</p>
+      <Styles.Qty>{qty}</Styles.Qty>
     </Styles.Wrapper>
   );
 };
