@@ -18,7 +18,7 @@ const IconItem = styled(Icon)`
 const Title = styled.p`
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin: 5px 0;
   color: ${palette.common.white};
 `;
 

@@ -1,6 +1,6 @@
 import localStorage from 'browser-localstorage-expire';
-import { validateArr, validateNumber } from 'utils';
-import { validateObj } from '../utils/index';
+import { validateString, validateObj } from 'utils';
+import svgsDb from './svgsDb';
 
 const DB_KEY = 'itemsDb';
 const dbCache = localStorage();
@@ -12,10 +12,10 @@ interface INewItem {
 export interface IItem extends INewItem {
   id: number;
   qty: number;
+  iconName: string;
 }
 interface IDb {
   getAllItems: () => IItem[] | [];
-  getItemById: (id: number) => IItem | Partial<IItem>;
   saveItem: (item: INewItem) => void;
   updateItem: (item: IItem) => void;
   deleteItem: (id: number) => void;
@@ -28,9 +28,21 @@ const createId = (): number => Date.now();
 
 const getAllItems = () => dbCache.getItem(DB_KEY);
 
+const getItemIcon = (name: string): string => {
+  if (!name || !validateString(name)) return 'grocery';
+  const svgsKey = Object.keys(svgsDb);
+
+  const [matchIcon] = svgsKey.filter((svgKey) => svgsDb[svgKey].includes(name));
+
+  return !matchIcon ? 'grocery' : matchIcon;
+};
+
 const saveItem = (item: INewItem): void => {
   const items = getAllItems();
-  return setItemCache([...items, { id: createId(), qty: 1, ...item }]);
+  return setItemCache([
+    ...items,
+    { id: createId(), qty: 1, iconName: getItemIcon(item.name), ...item },
+  ]);
 };
 
 const deleteItem = (id: number): void => {
@@ -47,18 +59,11 @@ const updateItem = (item: IItem): void => {
 
   const oldItems = getAllItems();
   const newItems = oldItems.map((oldItem: IItem) =>
-    oldItem.id === id ? { id, ...rest } : oldItem
+    oldItem.id === id
+      ? { id, ...rest, iconName: getItemIcon(item.name) }
+      : oldItem
   );
   setItemCache(newItems);
-};
-
-const getItemById = (id: number): IItem | Partial<IItem> => {
-  if (!id || !validateNumber(id)) return {};
-  const items = getAllItems();
-  if (!validateArr(items)) return {};
-
-  const [item] = items.filter((item: IItem) => item.id === id);
-  return item;
 };
 
 const db = (): IDb => {
@@ -67,7 +72,6 @@ const db = (): IDb => {
 
   return {
     getAllItems,
-    getItemById: (id: number) => getItemById(id),
     deleteItem: (id: number) => deleteItem(id),
     saveItem: (item: INewItem) => saveItem(item),
     updateItem: (item: IItem) => updateItem(item),

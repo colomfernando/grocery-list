@@ -15,7 +15,7 @@ const Body: React.FC = () => {
 
   return (
     <Styles.Wrapper>
-      {items.length && items.map((item) => <Item key={item.id} {...item} />)}
+      {!!items.length && items.map((item) => <Item key={item.id} {...item} />)}
     </Styles.Wrapper>
   );
 };
