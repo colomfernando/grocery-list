@@ -1,15 +1,14 @@
 import React from 'react';
 import GlobalStyles from 'theme/GlobalStyles';
 import Header from 'components/Header';
-import InputSearch from 'components/InputSearch';
+import Body from 'components/Body';
 
 const App: React.FC = () => {
   return (
     <>
       <GlobalStyles />
-      <Header>
-        <InputSearch />
-      </Header>
+      <Header />
+      <Body />
     </>
   );
 };

@@ -9,7 +9,7 @@ interface INewItem {
   [key: string]: unknown;
   name: string;
 }
-interface IItem extends INewItem {
+export interface IItem extends INewItem {
   id: number;
   qty: number;
 }
