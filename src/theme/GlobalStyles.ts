@@ -25,7 +25,7 @@ html {
  */
 body {
   margin: 0;
-	font-family: 'Rubik', sans-serif;
+	font-family: 'Lato', sans-serif;
 	background-color: ${palette.secondary.main}
 }
 /**

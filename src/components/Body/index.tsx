@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import Item from 'components/Item';
 import db, { IItem } from 'db';
 import Styles from './styles';
+import Item from 'components/Item';
 
 const Body: React.FC = () => {
   const [items, setItems] = useState<IItem[]>([]);
@@ -14,7 +15,7 @@ const Body: React.FC = () => {
 
   return (
     <Styles.Wrapper>
-      <p>body</p>
+      {items.length && items.map((item) => <Item key={item.id} {...item} />)}
     </Styles.Wrapper>
   );
 };
