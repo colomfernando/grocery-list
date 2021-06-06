@@ -2,7 +2,7 @@ import localStorage from 'browser-localstorage-expire';
 import { validateString, validateArr } from 'utils';
 
 const cache = localStorage();
-const ITEMS_CACHE_KEY = 'savedItems';
+const ITEMS_CACHE_KEY = 'itemsCache';
 
 interface parseItems {
   [key: string]: number | never;
@@ -17,7 +17,7 @@ export const saveItem = (item: string): void | null => {
       ? [item]
       : [...cacheItems, item];
 
-  return cache.setItem(ITEMS_CACHE_KEY, newItems, 99);
+  return cache.setItem(ITEMS_CACHE_KEY, newItems, 1440);
 };
 
 export const getCountItems = (): parseItems => {

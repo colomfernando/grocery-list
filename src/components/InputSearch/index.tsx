@@ -3,6 +3,7 @@ import Styles from './styles';
 import palette from 'theme/palette';
 import Chip from 'components/Chip';
 import { saveItem } from 'utils/ItemsCache';
+import db from 'db';
 
 type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
 
@@ -19,6 +20,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
   const handleSubmit = (): void => {
     if (!value) return;
     saveItem(value);
+    db.saveItem({ name: value });
     setValue('');
   };
 

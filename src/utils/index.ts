@@ -7,7 +7,7 @@
  * @example validateObj({name: 'test'}) // true
  */
 
-export const validateObj = <T>(obj: Record<string, T> = {}): boolean =>
+export const validateObj = (obj: Record<string, unknown>): boolean =>
   obj && obj.constructor === Object;
 
 /**
