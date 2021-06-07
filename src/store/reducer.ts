@@ -16,6 +16,9 @@ const reducer = (state: IState = initialState, action: IAction): IState => {
 
     case actionTypes.ADD_ITEM:
       return { ...state, items: [...state.items, action.payload] };
+
+    case actionTypes.UPDATE_ITEMS:
+      return { ...state, items: action.payload };
     default:
       return state;
   }

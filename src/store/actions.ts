@@ -15,3 +15,8 @@ export const setLoadingAction = (bool: boolean): IAction => ({
   type: actionTypes.SET_LOADING,
   payload: bool,
 });
+
+export const updateItems = (items: IItem[]): IAction => ({
+  type: actionTypes.UPDATE_ITEMS,
+  payload: items,
+});

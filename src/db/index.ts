@@ -16,9 +16,9 @@ export interface IItem extends INewItem {
 }
 interface IDb {
   getAllItems: () => IItem[] | [];
-  saveItem: (item: INewItem) => void;
+  saveItem: (item: INewItem, cb?: (item: IItem) => void) => void;
   updateItem: (item: IItem) => void;
-  deleteItem: (id: number) => void;
+  deleteItem: (id: number, cb?: (item: IItem[]) => void) => void;
 }
 
 const setItemCache = (data: IItem[] | Partial<IItem>[]) =>
@@ -37,18 +37,27 @@ const getItemIcon = (name: string): string => {
   return !matchIcon ? 'grocery' : matchIcon;
 };
 
-const saveItem = (item: INewItem): void => {
+const saveItem = (item: INewItem, cb?: (item: IItem) => void): void => {
   const items = getAllItems();
-  return setItemCache([
-    ...items,
-    { id: createId(), qty: 1, iconName: getItemIcon(item.name), ...item },
-  ]);
+  const newItem = {
+    id: createId(),
+    qty: 1,
+    iconName: getItemIcon(item.name),
+    ...item,
+  };
+  setItemCache([...items, newItem]);
+  if (cb) {
+    cb(newItem);
+  }
 };
 
-const deleteItem = (id: number): void => {
+const deleteItem = (id: number, cb?: (items: IItem[]) => void): void => {
   const items = getAllItems();
   const filterItems = items.filter((item: IItem) => item.id !== id);
-  return setItemCache(filterItems);
+  setItemCache(filterItems);
+  if (cb) {
+    cb(filterItems);
+  }
 };
 
 const updateItem = (item: IItem): void => {
@@ -70,8 +79,10 @@ const db = (): IDb => {
 
   return {
     getAllItems,
-    deleteItem: (id: number) => deleteItem(id),
-    saveItem: (item: INewItem) => saveItem(item),
+    deleteItem: (id: number, cb?: (item: IItem[]) => void) =>
+      deleteItem(id, cb),
+    saveItem: (item: INewItem, cb?: (item: IItem) => void) =>
+      saveItem(item, cb),
     updateItem: (item: IItem) => updateItem(item),
   };
 };

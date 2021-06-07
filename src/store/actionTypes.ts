@@ -1,5 +1,6 @@
 const INIT_DB = 'INIT_DB';
 const SET_LOADING = 'SET_LOADING';
 const ADD_ITEM = 'ADD_ITEM';
+const UPDATE_ITEMS = 'UPDATE_ITEMS';
 
-export default { INIT_DB, SET_LOADING, ADD_ITEM };
+export default { INIT_DB, SET_LOADING, ADD_ITEM, UPDATE_ITEMS };

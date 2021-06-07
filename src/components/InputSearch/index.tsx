@@ -3,6 +3,8 @@ import Styles from './styles';
 import palette from 'theme/palette';
 import Chip from 'components/Chip';
 import { saveItem } from 'utils/ItemsCache';
+import { useDispatch } from 'react-redux';
+import { addItemAction } from 'store/actions';
 import db from 'db';
 
 type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
@@ -10,6 +12,8 @@ type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
 const InputSearch: React.FC<IInputSearchProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -20,7 +24,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
   const handleSubmit = (): void => {
     if (!value) return;
     saveItem(value);
-    db.saveItem({ name: value });
+    db.saveItem({ name: value }, (item) => dispatch(addItemAction(item)));
     setValue('');
   };
 

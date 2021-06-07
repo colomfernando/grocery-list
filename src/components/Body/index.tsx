@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
-// import Item from 'components/Item';
-import db, { IItem } from 'db';
+import React from 'react';
 import Styles from './styles';
 import Item from 'components/Item';
+import { useSelector } from 'react-redux';
+import { IItem, IState } from 'store/type';
 
 const Body: React.FC = () => {
-  const [items, setItems] = useState<IItem[]>([]);
-
-  useEffect(() => {
-    const itemsDb = db.getAllItems();
-    if (!itemsDb.length) return;
-    setItems(itemsDb);
-  }, []);
+  const items = useSelector((state: IState): IItem[] => state.items);
 
   return (
     <Styles.Wrapper>
