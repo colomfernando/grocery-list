@@ -3,6 +3,7 @@ import palette from 'theme/palette';
 import Icon from 'components/Icon';
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   padding: 10px;
 `;
 
-const IconItem = styled(Icon)`
+const ItemIcon = styled(Icon)`
   color: ${palette.common.white};
 `;
 
@@ -27,5 +28,21 @@ const Qty = styled.p`
   color: ${palette.common.white};
 `;
 
+const DeleteButton = styled.button`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const DeleteIcon = styled(Icon)`
+  color: ${palette.common.white};
+`;
+
 Wrapper.displayName = 'Item';
-export default { Wrapper, IconItem, Title, Qty };
+export default { Wrapper, ItemIcon, Title, Qty, DeleteButton, DeleteIcon };
