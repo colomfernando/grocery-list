@@ -7,9 +7,11 @@ const Wrapper = styled.div`
   grid-column-gap: 5px;
   grid-row-gap: 5px;
   padding: 0 10px;
+  padding-top: 102px;
   margin-top: 20px;
   ${breakpoints.md`
 		padding: 0 15px;
+		padding-top: 102px;
 	`}
   ${breakpoints.lg`
 		max-width: 1280px;
