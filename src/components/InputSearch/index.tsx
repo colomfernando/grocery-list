@@ -36,6 +36,13 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
     setIsOpen(false);
   };
 
+  const handleOnClickChip = (name: string): void => {
+    if (!name) return;
+    db.saveItem({ name }, (item) => {
+      dispatch(addItemAction(item));
+      setIsOpen(false);
+    });
+  };
   const handleOnKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>
   ): void => {
@@ -76,7 +83,6 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
         onKeyDown={handleOnKeyDown}
         value={value}
         onFocus={() => setIsOpen(true)}
-        onBlur={() => setIsOpen(false)}
         placeholder="What do you need to buy?"
       />
       <Styles.SaveItem type="submit" disabled={!value} onClick={handleSubmit}>
@@ -87,10 +93,14 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
           color={!value ? palette.grey[700] : palette.success.main}
         />
       </Styles.SaveItem>
-      {true && infoChips && infoChips.length && (
+      {isOpen && infoChips && infoChips.length && (
         <Styles.WrapperOptions>
           {infoChips.map((chip, idx) => (
-            <Styles.Chip key={idx.toString()} {...chip} onClick={() => null} />
+            <Styles.Chip
+              key={idx.toString()}
+              {...chip}
+              onClick={() => handleOnClickChip(chip.text)}
+            />
           ))}
         </Styles.WrapperOptions>
       )}
