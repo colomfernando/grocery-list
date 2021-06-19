@@ -1,23 +1,30 @@
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { InputHTMLAttributes, useState, useEffect } from 'react';
 import Styles from './styles';
 import palette from 'theme/palette';
-import Chip from 'components/Chip';
-import { saveItem } from 'utils/ItemsCache';
+import { saveItem, getCountItems } from 'utils/ItemsCache';
 import { useDispatch } from 'react-redux';
 import { addItemAction } from 'store/actions';
 import db from 'db';
+import { validateObj, getItemIcon } from '../../utils/index';
 
 type IInputSearchProps = InputHTMLAttributes<HTMLInputElement>;
+
+interface IItemChip {
+  text: string;
+  iconName: string;
+}
 
 const InputSearch: React.FC<IInputSearchProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [value, setValue] = useState('');
+  const [infoChips, setInfoChips] = useState<IItemChip[] | []>([]);
 
   const dispatch = useDispatch();
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const { value } = target;
+    if (!isOpen) setIsOpen(true);
     setValue(value);
   };
 
@@ -26,6 +33,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
     saveItem(value);
     db.saveItem({ name: value }, (item) => dispatch(addItemAction(item)));
     setValue('');
+    setIsOpen(false);
   };
 
   const handleOnKeyDown = (
@@ -34,6 +42,24 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
     const { key } = event;
     if (key === 'Enter') handleSubmit();
   };
+
+  const getChips = (): IItemChip[] | [] => {
+    const countItems = getCountItems();
+    if (!countItems || !validateObj(countItems)) return [];
+
+    const itemsKey = Object.keys(countItems);
+    const itemsByQty = itemsKey.filter((item) => countItems[item] > 2);
+
+    if (!itemsByQty || !itemsByQty.length) return [];
+    return itemsByQty.map((key) => ({ text: key, iconName: getItemIcon(key) }));
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      const chips = getChips();
+      if (chips.length) setInfoChips(chips);
+    }
+  }, [isOpen]);
 
   return (
     <Styles.Wrapper>
@@ -59,9 +85,11 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
           color={!value ? palette.grey[700] : palette.success.main}
         />
       </Styles.SaveItem>
-      {isOpen && (
+      {isOpen && infoChips && infoChips.length && (
         <Styles.WrapperOptions>
-          <Chip iconName="eggs" text="Eggs" onClick={() => null} />
+          {infoChips.map((chip, idx) => (
+            <Styles.Chip key={idx.toString()} {...chip} onClick={() => null} />
+          ))}
         </Styles.WrapperOptions>
       )}
     </Styles.Wrapper>

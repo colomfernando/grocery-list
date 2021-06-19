@@ -1,3 +1,5 @@
+import svgsDb from '../db/svgsDb';
+
 /**
  * @name validateObj
  * @param {object} [obj={}]
@@ -65,3 +67,19 @@ export function debounce(
     }, wait);
   };
 }
+
+/**
+ *
+ * @param {string} name - icon name
+ * @description return icon name if exist on icon svg or 'grocery'
+ * @return {string}
+ * @returns
+ */
+export const getItemIcon = (name: string): string => {
+  if (!name || !validateString(name)) return 'grocery';
+  const svgsKey = Object.keys(svgsDb);
+
+  const [matchIcon] = svgsKey.filter((svgKey) => svgsDb[svgKey].includes(name));
+
+  return !matchIcon ? 'grocery' : matchIcon;
+};

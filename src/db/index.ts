@@ -1,6 +1,5 @@
 import localStorage from 'browser-localstorage-expire';
-import { validateString, validateObj } from 'utils';
-import svgsDb from './svgsDb';
+import { validateObj, getItemIcon } from 'utils';
 
 const DB_KEY = 'itemsDb';
 const dbCache = localStorage();
@@ -27,15 +26,6 @@ const setItemCache = (data: IItem[] | Partial<IItem>[]) =>
 const createId = (): number => Date.now();
 
 const getAllItems = () => dbCache.getItem(DB_KEY);
-
-const getItemIcon = (name: string): string => {
-  if (!name || !validateString(name)) return 'grocery';
-  const svgsKey = Object.keys(svgsDb);
-
-  const [matchIcon] = svgsKey.filter((svgKey) => svgsDb[svgKey].includes(name));
-
-  return !matchIcon ? 'grocery' : matchIcon;
-};
 
 const saveItem = (item: INewItem, cb?: (item: IItem) => void): void => {
   const items = getAllItems();

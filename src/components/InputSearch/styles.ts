@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import IconComponent from 'components/Icon';
 import palette from 'theme/palette';
+import ChipComponent from 'components/Chip';
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,8 +40,16 @@ const SaveItem = styled.button`
 `;
 
 const WrapperOptions = styled.div`
+  display: flex;
+  align-items: center;
   flex-basis: 100%;
   padding: 10px 0 5px;
+`;
+
+const Chip = styled(ChipComponent)`
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
 `;
 
 Wrapper.displayName = 'InputSearch';
@@ -51,4 +60,5 @@ export default {
   WrapperOptions,
   IconSave,
   SaveItem,
+  Chip,
 };

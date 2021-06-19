@@ -10,6 +10,7 @@ const Wrapper = styled.button`
   justify-content: center;
   border-radius: 5px;
   border: none;
+  padding: 5px 8px;
   background: ${palette.primary.main};
 `;
 
