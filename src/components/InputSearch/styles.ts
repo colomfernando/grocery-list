@@ -41,6 +41,7 @@ const SaveItem = styled.button`
 
 const WrapperOptions = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   flex-basis: 100%;
   padding: 10px 0 5px;

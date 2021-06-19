@@ -29,10 +29,11 @@ const getAllItems = () => dbCache.getItem(DB_KEY);
 
 const saveItem = (item: INewItem, cb?: (item: IItem) => void): void => {
   const items = getAllItems();
+  const correctName = item.name.toLowerCase();
   const newItem = {
     id: createId(),
     qty: 1,
-    iconName: getItemIcon(item.name),
+    iconName: getItemIcon(correctName),
     ...item,
   };
   setItemCache([...items, newItem]);

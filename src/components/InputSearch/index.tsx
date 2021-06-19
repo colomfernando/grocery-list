@@ -51,7 +51,9 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
     const itemsByQty = itemsKey.filter((item) => countItems[item] > 2);
 
     if (!itemsByQty || !itemsByQty.length) return [];
-    return itemsByQty.map((key) => ({ text: key, iconName: getItemIcon(key) }));
+    return itemsByQty
+      .map((key) => ({ text: key, iconName: getItemIcon(key) }))
+      .slice(0, 4);
   };
 
   useEffect(() => {
@@ -85,7 +87,7 @@ const InputSearch: React.FC<IInputSearchProps> = () => {
           color={!value ? palette.grey[700] : palette.success.main}
         />
       </Styles.SaveItem>
-      {isOpen && infoChips && infoChips.length && (
+      {true && infoChips && infoChips.length && (
         <Styles.WrapperOptions>
           {infoChips.map((chip, idx) => (
             <Styles.Chip key={idx.toString()} {...chip} onClick={() => null} />
