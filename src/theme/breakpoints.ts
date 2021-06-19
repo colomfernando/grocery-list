@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { css, CSSObject, SimpleInterpolation } from 'styled-components';
+import { css } from 'styled-components';
 
 interface IBreakpoints {
   sm: number;
@@ -7,7 +7,7 @@ interface IBreakpoints {
   lg: number;
 }
 
-type Args = [CSSObject, SimpleInterpolation];
+type Args = [TemplateStringsArray];
 
 const breakpointsValues: IBreakpoints = {
   sm: 600,
