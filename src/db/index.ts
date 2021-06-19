@@ -17,7 +17,7 @@ export interface IItem extends INewItem {
 interface IDb {
   getAllItems: () => IItem[] | [];
   saveItem: (item: INewItem, cb?: (item: IItem) => void) => void;
-  updateItem: (item: IItem) => void;
+  updateItem: (item: IItem, cb?: (item: IItem[]) => void) => void;
   deleteItem: (id: number, cb?: (item: IItem[]) => void) => void;
 }
 
@@ -60,7 +60,7 @@ const deleteItem = (id: number, cb?: (items: IItem[]) => void): void => {
   }
 };
 
-const updateItem = (item: IItem): void => {
+const updateItem = (item: IItem, cb?: (items: IItem[]) => void): void => {
   if (!validateObj(item)) return;
 
   const { id, ...rest } = item;
@@ -71,6 +71,9 @@ const updateItem = (item: IItem): void => {
     oldItem.id === id ? { id, ...rest } : oldItem
   );
   setItemCache(newItems);
+  if (cb) {
+    cb(newItems);
+  }
 };
 
 const db = (): IDb => {
@@ -83,7 +86,8 @@ const db = (): IDb => {
       deleteItem(id, cb),
     saveItem: (item: INewItem, cb?: (item: IItem) => void) =>
       saveItem(item, cb),
-    updateItem: (item: IItem) => updateItem(item),
+    updateItem: (item: IItem, cb?: (item: IItem[]) => void) =>
+      updateItem(item, cb),
   };
 };
 
