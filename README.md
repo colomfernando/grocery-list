@@ -3,6 +3,8 @@
 
 This app is set up with React, Typescript and Styled components.
 
+[Live demo](https://grocery-list-demo.netlify.app/)
+
 ## How to use
 
 Clone the repository and run npm i to install all dependencies.
